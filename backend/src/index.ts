@@ -67,7 +67,8 @@ app.post("/ads", (req, res) => {
 });
 
 app.delete("/ads/:id", (req, res) => {
-  ads = ads.filter((ad) => ad.id !== Number.parseInt(req.params.id));
+  const stmt = db.prepare("DELETE FROM ad WHERE id = ?");
+  stmt.run(req.params.id);
   res.send("The ad was deleted");
 });
 
