@@ -42,6 +42,7 @@ app.get("/ads", (_req, res) => {
 
 app.post("/ads", (req, res) => {
   console.log(req.body);
+  ads.push(req.body);
   res.send("Request received, check the backend terminal");
 });
 
