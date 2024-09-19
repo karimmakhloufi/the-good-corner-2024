@@ -51,6 +51,17 @@ app.delete("/ads/:id", (req, res) => {
   res.send("The ad was deleted");
 });
 
+app.put("/ads/:id", (req, res) => {
+  ads = ads.map((ad) => {
+    if (ad.id !== Number.parseInt(req.params.id)) {
+      return ad;
+    } else {
+      return req.body;
+    }
+  });
+  res.send("The ad was updated");
+});
+
 app.listen(port, () => {
   console.log(`Example app listening on port ${port}`);
 });
