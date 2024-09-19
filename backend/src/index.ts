@@ -51,7 +51,18 @@ app.get("/ads", (_req, res) => {
 
 app.post("/ads", (req, res) => {
   console.log(req.body);
-  ads.push(req.body);
+  const stmt = db.prepare(
+    "INSERT INTO ad (title, description, author, price, img_url, city, creation_date) VALUES (?, ?, ?, ?, ?, ?, ?)"
+  );
+  stmt.run([
+    req.body.title,
+    req.body.description,
+    req.body.author,
+    req.body.price,
+    req.body.img_url,
+    req.body.city,
+    req.body.createdAt,
+  ]);
   res.send("Request received, check the backend terminal");
 });
 
