@@ -5,7 +5,7 @@ const port = 3000;
 
 app.use(express.json());
 
-const ads = [
+let ads = [
   {
     id: 1,
     title: "Bike to sell",
@@ -44,6 +44,11 @@ app.post("/ads", (req, res) => {
   console.log(req.body);
   ads.push(req.body);
   res.send("Request received, check the backend terminal");
+});
+
+app.delete("/ads/:id", (req, res) => {
+  ads = ads.filter((ad) => ad.id !== Number.parseInt(req.params.id));
+  res.send("The ad was deleted");
 });
 
 app.listen(port, () => {
