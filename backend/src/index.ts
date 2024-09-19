@@ -1,4 +1,6 @@
 import express from "express";
+import sqlite3 from "sqlite3";
+const db = new sqlite3.Database("good_corner.sqlite");
 
 const app = express();
 const port = 3000;
@@ -37,7 +39,14 @@ app.get("/", (_req, res) => {
 });
 
 app.get("/ads", (_req, res) => {
-  res.send(ads);
+  db.all("SELECT * FROM ad", (err, rows) => {
+    if (err) {
+      console.error(err);
+      res.status(500).send("An error occurred");
+    } else {
+      res.send(rows);
+    }
+  });
 });
 
 app.post("/ads", (req, res) => {
