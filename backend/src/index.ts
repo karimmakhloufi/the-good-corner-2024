@@ -3,6 +3,8 @@ import express from "express";
 const app = express();
 const port = 3000;
 
+app.use(express.json());
+
 const ads = [
   {
     id: 1,
@@ -36,6 +38,11 @@ app.get("/", (_req, res) => {
 
 app.get("/ads", (_req, res) => {
   res.send(ads);
+});
+
+app.post("/ads", (req, res) => {
+  console.log(req.body);
+  res.send("Request received, check the backend terminal");
 });
 
 app.listen(port, () => {
