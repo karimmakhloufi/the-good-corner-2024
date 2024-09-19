@@ -9,6 +9,15 @@ CREATE TABLE IF NOT EXISTS ad (
     city TEXT NOT NULL
 );
 
+
+
+
+/*
+SELECT * FROM ad WHERE city = 'Bordeaux';
+SELECT * FROM ad;
+DELETE FROM ad WHERE price > 600;
+SELECT AVG(price) FROM ad where city = 'Paris';
+
 INSERT INTO ad (
     title,
     description,
