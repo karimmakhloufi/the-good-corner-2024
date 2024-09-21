@@ -1,5 +1,8 @@
+import "reflect-metadata";
 import express from "express";
 import sqlite3 from "sqlite3";
+import { dataSource } from "./config/db";
+import { Ad } from "./entities/Ad";
 const db = new sqlite3.Database("good_corner.sqlite");
 
 const app = express();
@@ -11,15 +14,9 @@ app.get("/", (_req, res) => {
   res.send("Hello World!");
 });
 
-app.get("/ads", (_req, res) => {
-  db.all("SELECT * FROM ad", (err, rows) => {
-    if (err) {
-      console.error(err);
-      res.status(500).send("An error occurred");
-    } else {
-      res.send(rows);
-    }
-  });
+app.get("/ads", async (_req, res) => {
+  const result = await Ad.find();
+  res.send(result);
 });
 
 app.post("/ads", (req, res) => {
@@ -62,6 +59,7 @@ app.put("/ads/:id", (req, res) => {
   res.send("The ad was updated");
 });
 
-app.listen(port, () => {
+app.listen(port, async () => {
+  await dataSource.initialize();
   console.log(`Example app listening on port ${port}`);
 });
