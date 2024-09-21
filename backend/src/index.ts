@@ -19,21 +19,10 @@ app.get("/ads", async (_req, res) => {
   res.send(result);
 });
 
-app.post("/ads", (req, res) => {
+app.post("/ads", async (req, res) => {
+  await Ad.create(req.body).save();
   console.log(req.body);
-  const stmt = db.prepare(
-    "INSERT INTO ad (title, description, author, price, img_url, city, creation_date) VALUES (?, ?, ?, ?, ?, ?, ?)"
-  );
-  stmt.run([
-    req.body.title,
-    req.body.description,
-    req.body.author,
-    req.body.price,
-    req.body.img_url,
-    req.body.city,
-    req.body.createdAt,
-  ]);
-  res.send("Request received, check the backend terminal");
+  res.send("Ad created");
 });
 
 app.delete("/ads/:id", (req, res) => {
