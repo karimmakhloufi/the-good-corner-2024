@@ -25,9 +25,8 @@ app.post("/ads", async (req, res) => {
   res.send("Ad created");
 });
 
-app.delete("/ads/:id", (req, res) => {
-  const stmt = db.prepare("DELETE FROM ad WHERE id = ?");
-  stmt.run(req.params.id);
+app.delete("/ads/:id", async (req, res) => {
+  await Ad.delete(req.params.id);
   res.send("The ad was deleted");
 });
 
