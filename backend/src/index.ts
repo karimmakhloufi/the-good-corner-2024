@@ -3,6 +3,7 @@ import express from "express";
 import { dataSource } from "./config/db";
 import { Ad } from "./entities/Ad";
 import { Category } from "./entities/Category";
+import { Tag } from "./entities/Tag";
 
 const app = express();
 const port = 3000;
@@ -53,6 +54,27 @@ app.delete("/categories/:id", async (req, res) => {
 app.put("/categories/:id", async (req, res) => {
   await Category.update({ id: parseInt(req.params.id) }, req.body);
   res.send("The category was updated");
+});
+
+app.get("/tags", async (_req, res) => {
+  const result = await Tag.find();
+  res.send(result);
+});
+
+app.post("/tags", async (req, res) => {
+  await Tag.create(req.body).save();
+  console.log(req.body);
+  res.send("Tag created");
+});
+
+app.delete("/tags/:id", async (req, res) => {
+  await Tag.delete(req.params.id);
+  res.send("The tag was deleted");
+});
+
+app.put("/tags/:id", async (req, res) => {
+  await Tag.update({ id: parseInt(req.params.id) }, req.body);
+  res.send("The tag was updated");
 });
 
 app.listen(port, async () => {
