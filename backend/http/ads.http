@@ -13,7 +13,8 @@ Content-Type: application/json
   "img_url": "https://images.lecho.be/view?iid=dc:113129565&context=ONLINE&ratio=16/9&width=640&u=1508242455000",
   "city": "Paris",
   "creation_date": "2023-09-05T10:13:14.755Z",
-  "category": 2
+  "category": 2,
+  "tags": [{"id":1},{"id":2}]
 }
 
 ###
@@ -21,7 +22,7 @@ Content-Type: application/json
 DELETE http://localhost:3000/ads/2
 
 ###
-PUT http://localhost:3000/ads/3
+PUT http://localhost:3000/ads/2
 Content-Type: application/json
 
 {
@@ -32,6 +33,7 @@ Content-Type: application/json
   "img_url": "https://images.lecho.be/view?iid=dc:113129565&context=ONLINE&ratio=16/9&width=640&u=1508242455000",
   "city": "Paris",
   "creation_date": "2023-09-05T10:13:14.755Z",
-  "category": 2
+  "category": 2,
+  "tags": [{"id":1},{"id":2}]
 }
 

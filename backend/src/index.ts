@@ -31,7 +31,11 @@ app.delete("/ads/:id", async (req, res) => {
 });
 
 app.put("/ads/:id", async (req, res) => {
-  await Ad.update({ id: parseInt(req.params.id) }, req.body);
+  let adToUpdate = await Ad.findOneByOrFail({
+    id: Number.parseInt(req.params.id),
+  });
+  adToUpdate = Object.assign(adToUpdate, req.body);
+  adToUpdate.save();
   res.send("The ad was updated");
 });
 
