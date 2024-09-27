@@ -1,8 +1,18 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import axios from "axios";
 import AdCard, { AdCardProps } from "./AdCard";
 
 const RecentsAds = () => {
   const [total, setTotal] = useState(0);
+  useEffect(() => {
+    const fetchData = async () => {
+      const result = await axios.get<AdCardProps[]>(
+        "http://localhost:3000/ads"
+      );
+      console.log(result);
+    };
+    fetchData();
+  }, []);
   const ads: AdCardProps[] = [
     {
       title: "Table",
