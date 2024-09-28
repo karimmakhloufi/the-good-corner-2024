@@ -1,13 +1,14 @@
 import axios from "axios";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 type Category = { id: number; name: string };
 const NewAd = () => {
+  const [categories, setCategories] = useState<Category[]>([]);
   useEffect(() => {
     const fetchCategories = async () => {
       const result = await axios.get<Category[]>(
         "http://localhost:3000/categories"
       );
-      console.log(result);
+      setCategories(result.data);
     };
     fetchCategories();
   }, []);
@@ -61,7 +62,14 @@ const NewAd = () => {
         Date de creation :
         <br />
         <input type="date" className="text-field" name="creation_date" />
-      </label>{" "}
+      </label>
+      <select name="category">
+        {categories.map((el) => (
+          <option value={el.id} key={el.id}>
+            {el.name}
+          </option>
+        ))}
+      </select>
       <button className="button">Submit</button>
     </form>
   );
