@@ -19,13 +19,13 @@ const NewAd = () => {
         const form = e.target;
         const formData = new FormData(form as HTMLFormElement);
         const formJson = Object.fromEntries(formData.entries());
-        console.log(formJson);
+        axios.post("http://localhost:3000/ads", formJson);
       }}
     >
       <label>
         Titre de l&apos;annonce :
         <br />
-        <input className="text-field" name="titre" />
+        <input className="text-field" name="title" />
       </label>
       <br />
       <label>
@@ -63,6 +63,7 @@ const NewAd = () => {
         <br />
         <input type="date" className="text-field" name="creation_date" />
       </label>
+      <br />
       <select name="category">
         {categories.map((el) => (
           <option value={el.id} key={el.id}>
