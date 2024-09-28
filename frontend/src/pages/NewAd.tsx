@@ -1,4 +1,16 @@
+import axios from "axios";
+import { useEffect } from "react";
+type Category = { id: number; name: string };
 const NewAd = () => {
+  useEffect(() => {
+    const fetchCategories = async () => {
+      const result = await axios.get<Category[]>(
+        "http://localhost:3000/categories"
+      );
+      console.log(result);
+    };
+    fetchCategories();
+  }, []);
   return (
     <form
       onSubmit={(e) => {
