@@ -16,8 +16,16 @@ app.get("/", (_req, res) => {
   res.send("Hello World!");
 });
 
-app.get("/ads", async (_req, res) => {
-  const result = await Ad.find();
+app.get("/ads", async (req, res) => {
+  let result: Ad[] = [];
+  console.log(req.query);
+  if (req.query.category) {
+    result = await Ad.find({
+      where: { category: { name: req.query.category as string } },
+    });
+  } else {
+    result = await Ad.find();
+  }
   res.send(result);
 });
 
